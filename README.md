@@ -4,7 +4,8 @@
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 
-## Resources
+## Development Resources
+[Expo](https://expo.io/)
 
 ### Card flip
 [Create a Flip Card Animation with React Native](https://codedaily.io/screencasts/12/Create-a-Flip-Card-Animation-with-React-Native)
