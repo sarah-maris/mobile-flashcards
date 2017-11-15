@@ -11,16 +11,15 @@ import { dkgray, white, gray, green, magenta } from '../utils/colors'
 
 export default class FlipCard extends Component {
 
-    state = {
-      flipAnim: new Animated.Value(0)
-    }
+  state = {
+    flipAnim: new Animated.Value(0)
+  }
 
   componentWillMount() {
     this.value = 0;
     this.state.flipAnim.addListener(({ value }) => {
       this.value = value;
     })
-
     this.frontInterpolate = this.state.flipAnim.interpolate({
       inputRange: [0, 180],
       outputRange: ['0deg', '180deg'],
@@ -29,16 +28,14 @@ export default class FlipCard extends Component {
       inputRange: [0, 180],
       outputRange: ['180deg', '360deg']
     })
-
-      this.frontOpacity = this.state.flipAnim.interpolate({
-        inputRange: [89, 90],
-        outputRange: [1, 0]
-      });
-
-      this.backOpacity = this.state.flipAnim.interpolate({
-        inputRange: [89, 90],
-        outputRange: [0, 1]
-      });
+    this.frontOpacity = this.state.flipAnim.interpolate({
+      inputRange: [89, 90],
+      outputRange: [1, 0]
+    })
+    this.backOpacity = this.state.flipAnim.interpolate({
+      inputRange: [89, 90],
+      outputRange: [0, 1]
+    })
   }
 
   flipCard() {
@@ -71,7 +68,6 @@ export default class FlipCard extends Component {
       opacity:   this.backOpacity
     }
 
-
     return (
       <View style={styles.container}>
         <View>
@@ -93,7 +89,8 @@ export default class FlipCard extends Component {
       )
     }
   }
-  var width = Dimensions.get('window').width*0.8
+
+  const width = Dimensions.get('window').width*0.8
   const styles = StyleSheet.create({
     container: {
       alignItems: 'center',
@@ -136,5 +133,4 @@ export default class FlipCard extends Component {
       textAlign: 'center',
       width: 100,
     }
-
 });

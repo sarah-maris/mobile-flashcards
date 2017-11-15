@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import FlipCard from './components/FlipCard'
+import Question from './components/Question'
 import { ltgreen } from './utils/colors'
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <FlipCard />
+        <Question />
       </View>
     );
   }
@@ -15,9 +15,6 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: ltgreen,
-    alignItems: 'center',
-    justifyContent: 'space-around',
+    flex: 1
   },
 });
