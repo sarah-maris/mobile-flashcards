@@ -5,3 +5,8 @@ This project was bootstrapped with [Create React Native App](https://github.com/
 
 
 ## Resources
+
+### Card flip
+[Create a Flip Card Animation with React Native](https://codedaily.io/screencasts/12/Create-a-Flip-Card-Animation-with-React-Native)
+
+[Alternate for backfaceVisibility - does not work on android](https://github.com/facebook/react-native/issues/1973#issuecomment-262059217)
