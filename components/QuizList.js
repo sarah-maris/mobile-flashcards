@@ -1,16 +1,21 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Text } from 'react-native';
+import { connect } from 'react-redux'
+import { StyleSheet, View, Text } from 'react-native'
 import FlipCard from './FlipCard'
-import { getDecks } from '../utils/api'
+import { getAllDecks } from '../utils/api'
+import { getDecks }  from '../actions'
 import { ltgreen } from '../utils/colors'
 
-export default class QuizList extends Component {
+class QuizList extends Component {
 
   componentDidMount () {
-    getDecks();
+    const { dispatch } = this.props
+    getAllDecks()
+    .then((decks) =>  dispatch(getDecks(decks)))
   }
 
   render() {
+
     return (
       <View style={styles.container}>
         <Text>
@@ -29,3 +34,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
 })
+
+function mapStateToProps (decks) {
+  return {
+    decks
+  }
+}
+
+export default connect(
+  mapStateToProps,
+)(QuizList)

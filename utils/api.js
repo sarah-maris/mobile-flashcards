@@ -4,13 +4,10 @@ import { START_DECKS }from './starterDecks'
 
 const DECK_STORAGE_KEY = 'flashquizzers'
 
-export function getDecks () {
+export function getAllDecks () {
   //AsyncStorage.clear();  ----  for debugging
-  AsyncStorage.getItem(DECK_STORAGE_KEY)
-    .then( (decks) => decks ? console.log("yay!", decks ) :
-       // if not decks add starter decks
-       (AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(START_DECKS )), console.log("start!",START_DECKS))
-     )
+  return  AsyncStorage.getItem(DECK_STORAGE_KEY)
+    .then(checkForDecks)
 }
 
 export function getDeck (id) {
@@ -23,4 +20,16 @@ export function addDeck (title) {
 
 export function addCard (title, card) {
   return
+}
+
+// helper functions for decks
+function checkForDecks (decks) {
+  return decks === null
+    ? addStarterDecks()
+    : JSON.parse(decks)
+}
+
+function addStarterDecks () {
+  AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(START_DECKS))
+  return START_DECKS
 }
