@@ -10,6 +10,7 @@ import Question from './components/Question'
 import QuizList from './components/QuizList'
 import { green, magenta, orange, white } from './utils/colors'
 import DeckTile from './components/DeckTile'
+import { setLocalNotification } from './utils/notifications'
 
 function FlashStatusBar ({backgroundColor, ...props}) {
   return (
@@ -71,7 +72,7 @@ const MainNavigator = StackNavigator({
       }
     }
   },
-DeckTile: {
+  DeckTile: {
     screen: DeckTile,
     navigationOptions: {
       headerTintColor: white,
@@ -83,6 +84,9 @@ DeckTile: {
 })
 
 export default class App extends React.Component {
+  componentDidMount() {
+      setLocalNotification()
+  }
   render() {
     return (
       <Provider store={createStore(reducer)}>
