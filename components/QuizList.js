@@ -9,7 +9,7 @@ import { StyleSheet,
        } from 'react-native'
 import { getAllDecks } from '../utils/api'
 import { getDecks }  from '../actions'
-import { ltgreen, gray, dkgray } from '../utils/colors'
+import { dkgray, gray, ltgreen, orange, white } from '../utils/colors'
 
 class QuizList extends Component {
 
@@ -19,7 +19,6 @@ class QuizList extends Component {
   }
 
   renderTile = ({item}) => (
-
     <TouchableOpacity
       onPress={() => this.props.navigation.navigate(
         'DeckTile',
@@ -34,7 +33,6 @@ class QuizList extends Component {
         </Text>
       </View>
     </TouchableOpacity>
-
   )
 
   render() {
@@ -51,6 +49,13 @@ class QuizList extends Component {
 
     return (
       <View style={styles.container}>
+        {/* TODO:  Add new quizzie here */}
+        <TouchableOpacity
+          onPress={() => console.log("new quizzie")}>
+          <View style={styles.addButton} >
+            <Text style={styles.addTitle} >Add New Quizzie</Text>
+          </View>
+        </TouchableOpacity>
         <FlatList
           data={deckList}
           renderItem={this.renderTile}
@@ -69,6 +74,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
   },
+  addButton: {
+    alignItems: 'center',
+    backgroundColor: orange,
+    borderRadius: 12,
+    justifyContent: 'center',
+    marginTop: 10,
+    width: width,
+  },
+  addTitle: {
+    color: white,
+    fontSize: 20,
+    fontWeight: 'bold',
+    padding: 10
+  },
   deckTile: {
     alignItems: 'center',
     backgroundColor: gray,
@@ -79,6 +98,7 @@ const styles = StyleSheet.create({
     width: width,
   },
   deckTitle: {
+    color: dkgray,
     fontSize: 20,
     fontWeight: 'bold',
     paddingBottom: 10

@@ -24,7 +24,7 @@ const Tabs = TabNavigator({
   Quizzes: {
     screen: QuizList,
     navigationOptions: {
-      tabBarLabel: 'Quizzes',
+      tabBarLabel: 'Quizzies',
       tabBarIcon: ({ tintColor }) => <FontAwesome name='question-circle' size={30} color={tintColor} />
     },
   },
