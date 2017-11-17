@@ -1,11 +1,11 @@
 import { AsyncStorage } from 'react-native'
 import { magenta } from './colors'
-import { START_DECKS }from './starterDecks'
+import { STARTER_DECKS }from './starterDecks'
 
 const DECK_STORAGE_KEY = 'flashquizzers'
 
 export function getAllDecks () {
-  //AsyncStorage.clear();  ----  for debugging
+  AsyncStorage.clear(); // ----  for debugging
   return  AsyncStorage.getItem(DECK_STORAGE_KEY)
     .then(checkForDecks)
 }
@@ -30,6 +30,6 @@ function checkForDecks (decks) {
 }
 
 function addStarterDecks () {
-  AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(START_DECKS))
-  return START_DECKS
+  AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(STARTER_DECKS))
+  return STARTER_DECKS
 }
