@@ -96,6 +96,7 @@ function mapStateToProps (decks) {
   }
 }
 
+
 export default connect(
   mapStateToProps,
 )(QuizList)
