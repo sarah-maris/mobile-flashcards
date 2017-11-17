@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, View, Text } from 'react-native'
-import FlipCard from './FlipCard'
+import DeckTile from './DeckTile'
 import { getAllDecks } from '../utils/api'
 import { getDecks }  from '../actions'
 import { ltgreen } from '../utils/colors'
@@ -9,18 +9,18 @@ import { ltgreen } from '../utils/colors'
 class QuizList extends Component {
 
   componentDidMount () {
-    const { dispatch } = this.props
     getAllDecks()
-    .then((decks) =>  dispatch(getDecks(decks)))
+    .then((decks) =>  this.props.dispatch(getDecks(decks)))
   }
 
   render() {
+    const { decks } = this.props
 
     return (
       <View style={styles.container}>
-        <Text>
-          List of Quizzes goes here
-        </Text>
+        {Object.keys(decks).map((deckId) => (
+          <DeckTile key={deckId} deck={decks[deckId]} />
+        ))}
       </View>
     )
   }
