@@ -9,6 +9,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import Question from './components/Question'
 import QuizList from './components/QuizList'
 import { green, magenta, orange, white } from './utils/colors'
+import DeckTile from './components/DeckTile'
 
 function FlashStatusBar ({backgroundColor, ...props}) {
   return (
@@ -61,15 +62,24 @@ const MainNavigator = StackNavigator({
   Home: {
     screen: Tabs,
   },
-  Quiz: {
-    screen: Question,
+  QuizList: {
+    screen: QuizList,
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {
         backgroundColor: magenta,
       }
     }
-  }
+  },
+DeckTile: {
+    screen: DeckTile,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: magenta,
+      }
+    }
+  },
 })
 
 export default class App extends React.Component {

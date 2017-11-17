@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, View, Text, FlatList, Dimensions } from 'react-native'
+import { StyleSheet,
+         View,
+         Text,
+         FlatList,
+         Dimensions,
+         TouchableOpacity
+       } from 'react-native'
 import { getAllDecks } from '../utils/api'
 import { getDecks }  from '../actions'
 import { ltgreen, gray, dkgray } from '../utils/colors'
@@ -15,18 +21,25 @@ class QuizList extends Component {
 
   renderTile = ({item}) => (
     <View style={styles.deckTile} >
+      <TouchableOpacity
+          onPress={() => this.props.navigation.navigate(
+              'DeckTile',
+            { deck: item.deck }
+          ) }
+          >
       <Text style={styles.deckTitle} >{item.title}</Text>
       <Text style={styles.numCards}>
         {item.questions.length} { item.questions.length !== 1
           ? "cards"
           : "card"}
       </Text>
+      </TouchableOpacity>
     </View>
   )
 
   render() {
     const { decks } = this.props
-
+console.log(this.props)
     // convert decks to array for FlatList
     const deckList = Object.keys(decks).map(function(deckId) {
       return { key: deckId,
@@ -73,6 +86,7 @@ const styles = StyleSheet.create({
   numCards: {
     color: dkgray,
     fontSize: 12,
+    alignSelf: 'center',
   }
 })
 
