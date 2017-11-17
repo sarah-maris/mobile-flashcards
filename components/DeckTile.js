@@ -4,6 +4,10 @@ import { connect } from 'react-redux'
 import { gray, ltgreen, dkgray } from '../utils/colors'
 
 class DeckTile extends Component {
+  static navigationOptions = ({navigation }) => {
+    const { deck } = navigation.state.params
+    return {title: `${deck.title} Quiz`}
+  }
 
   render() {
     console.log("props", this.props)
