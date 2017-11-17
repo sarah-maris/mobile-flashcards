@@ -20,21 +20,21 @@ class QuizList extends Component {
 
 
   renderTile = ({item}) => (
-    <View style={styles.deckTile} >
+
       <TouchableOpacity
           onPress={() => this.props.navigation.navigate(
               'DeckTile',
             { deck: item.deck }
           ) }
-          >
+          ><View style={styles.deckTile} >
       <Text style={styles.deckTitle} >{item.title}</Text>
       <Text style={styles.numCards}>
         {item.questions.length} { item.questions.length !== 1
           ? "cards"
           : "card"}
-      </Text>
+      </Text></View>
       </TouchableOpacity>
-    </View>
+
   )
 
   render() {
