@@ -18,28 +18,28 @@ class QuizList extends Component {
     .then((decks) =>  this.props.dispatch(getDecks(decks)))
   }
 
-
   renderTile = ({item}) => (
 
-      <TouchableOpacity
-          onPress={() => this.props.navigation.navigate(
-              'DeckTile',
-            { deck: item.deck }
-          ) }
-          ><View style={styles.deckTile} >
-      <Text style={styles.deckTitle} >{item.title}</Text>
-      <Text style={styles.numCards}>
-        {item.questions.length} { item.questions.length !== 1
+    <TouchableOpacity
+      onPress={() => this.props.navigation.navigate(
+        'DeckTile',
+        { deck: item.deck }
+    )}>
+      <View style={styles.deckTile} >
+        <Text style={styles.deckTitle} >{item.title}</Text>
+        <Text style={styles.numCards}>
+          {item.questions.length} { item.questions.length !== 1
           ? "cards"
           : "card"}
-      </Text></View>
-      </TouchableOpacity>
+        </Text>
+      </View>
+    </TouchableOpacity>
 
   )
 
   render() {
     const { decks } = this.props
-console.log(this.props)
+
     // convert decks to array for FlatList
     const deckList = Object.keys(decks).map(function(deckId) {
       return { key: deckId,
