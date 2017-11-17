@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Text, Dimensions } from 'react-native'
+import { StyleSheet,
+         View,
+         Text,
+         Dimensions,
+         TouchableOpacity
+       } from 'react-native'
 import { connect } from 'react-redux'
-import { gray, ltgreen, dkgray } from '../utils/colors'
+import { dkgray, gray, green, ltgreen, orange, white } from '../utils/colors'
 
 class DeckTile extends Component {
   static navigationOptions = ({navigation }) => {
@@ -23,6 +28,18 @@ class DeckTile extends Component {
               : "card"}
           </Text>
         </View>
+        <TouchableOpacity
+          onPress={() => console.log("start quizzie")}>
+          <View style={styles.startButton} >
+            <Text style={styles.addTitle} >start quizzie</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => console.log("add new question")}>
+          <View style={styles.addButton} >
+            <Text style={styles.addTitle} >add new question</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -35,12 +52,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: ltgreen,
     alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'flex-start',
   },
   deckTile: {
     alignItems: 'center',
     backgroundColor: gray,
-    borderColor: "#000",
     borderRadius: 12,
     height: 300,
     justifyContent: 'center',
@@ -48,13 +64,36 @@ const styles = StyleSheet.create({
     width: width,
   },
   deckTitle: {
-    fontSize: 20,
+    color: dkgray,
+    fontSize: 30,
     fontWeight: 'bold',
     paddingBottom: 10
   },
+  addButton: {
+    alignItems: 'center',
+    backgroundColor: orange,
+    borderRadius: 12,
+    justifyContent: 'center',
+    marginTop: 10,
+    width: width,
+  },
+  addTitle: {
+    color: white,
+    fontSize: 20,
+    fontWeight: 'bold',
+    padding: 10
+  },
+  startButton: {
+    alignItems: 'center',
+    backgroundColor: green,
+    borderRadius: 12,
+    justifyContent: 'center',
+    marginTop: 10,
+    width: width,
+  },
   numCards: {
     color: dkgray,
-    fontSize: 12,
+    fontSize: 18,
   }
 })
 
