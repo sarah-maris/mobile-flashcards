@@ -14,13 +14,15 @@ class DeckTile extends Component {
     const { deck } = this.props
 
     return (
-      <View style={styles.deckTile} >
-        <Text style={styles.deckTitle} >{deck.title}</Text>
-        <Text style={styles.numCards}>
-          {deck.questions.length} { deck.questions.length !== 1
-            ? "cards"
-            : "card"}
-        </Text>
+      <View style={styles.container} >
+        <View style={styles.deckTile}>
+          <Text style={styles.deckTitle} >{deck.title}</Text>
+          <Text style={styles.numCards}>
+            {deck.questions.length} { deck.questions.length !== 1
+              ? "cards"
+              : "card"}
+          </Text>
+        </View>
       </View>
     )
   }
@@ -38,8 +40,9 @@ const styles = StyleSheet.create({
   deckTile: {
     alignItems: 'center',
     backgroundColor: gray,
+    borderColor: "#000",
     borderRadius: 12,
-    height: 100,
+    height: 300,
     justifyContent: 'center',
     marginTop: 10,
     width: width,
