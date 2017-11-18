@@ -7,22 +7,27 @@ export default class Question extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <FlipCard />
-        <View style={styles.row}>
-          <TouchableOpacity
-            onPress={() => console.log("got it")}>
-            <View style={styles.greenButton} >
-              <Text style={styles.addTitle} >got it!</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => console.log("nope")}>
-            <View style={styles.redButton} >
-              <Text style={styles.addTitle} >nope</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
+        <View style={styles.questions}>
+        <Text>
+          2 of 2
+        </Text>
       </View>
+      <FlipCard />
+      <View style={styles.row}>
+        <TouchableOpacity
+          onPress={() => console.log("got it")}>
+          <View style={styles.greenButton} >
+            <Text style={styles.addTitle} >got it!</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => console.log("nope")}>
+          <View style={styles.redButton} >
+            <Text style={styles.addTitle} >nope</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    </View>
     )
   }
 }
@@ -34,6 +39,12 @@ const styles = StyleSheet.create({
     backgroundColor: ltgreen,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  questions :{
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    marginTop: 20,
+    width: width
   },
   deckTile: {
     alignItems: 'center',
