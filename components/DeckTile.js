@@ -7,6 +7,8 @@ import { StyleSheet,
        } from 'react-native'
 import { connect } from 'react-redux'
 import { dkgray, gray, green, ltgreen, orange, white } from '../utils/colors'
+import { getDeck } from '../utils/api'
+import { getDeckById }  from '../actions'
 
 class DeckTile extends Component {
   static navigationOptions = ({navigation }) => {
@@ -14,8 +16,14 @@ class DeckTile extends Component {
     return {title: `${deck.title} Quizzie`}
   }
 
+  componentDidMount () {
+    const { id } = this.props
+    getDeck(id)
+      .then((deck) => console.log("DECK", deck))
+  }
+
   render() {
-    console.log("props", this.props)
+
     const { deck } = this.props
 
     return (
@@ -98,11 +106,12 @@ const styles = StyleSheet.create({
 })
 
 function mapStateToProps (state, { navigation }) {
-  console.log( navigation)
-  const { deck } = navigation.state.params
+
+  const { deck, id } = navigation.state.params
 
   return {
-    deck
+    deck,
+    id
   }
 }
 

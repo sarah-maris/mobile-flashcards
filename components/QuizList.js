@@ -22,7 +22,7 @@ class QuizList extends Component {
     <TouchableOpacity
       onPress={() => this.props.navigation.navigate(
         'DeckTile',
-        { deck: item.deck }
+        { deck: item.deck, id: item.key }
     )}>
       <View style={styles.deckTile} >
         <Text style={styles.deckTitle} >{item.title}</Text>
