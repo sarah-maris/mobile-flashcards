@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
-import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions,
+         StyleSheet,
+         Text,
+         TouchableOpacity,
+         View
+       } from 'react-native'
+import { connect } from 'react-redux'
 import FlipCard from './FlipCard'
 import { dkgray, gray, green, ltgreen, red, white } from '../utils/colors'
 
@@ -7,24 +13,7 @@ export default class Question extends Component {
 
   state = {
     currentIndex: 0,
-    questions: [
-            {
-              question: 'What is a closure?',
-              answer: 'The combination of a function and the lexical environment within which that function was declared.'
-            },
-            {
-              question: 'Are semicolons required?',
-              answer: 'Yes, if you read the Udacity Nanodegree Style Guide. No, if you follow Tyler McGinnis.'
-            },
-            {
-              question: 'Can jQuery methods be used with JavaScript selectors?',
-              answer: 'No. Don\'t even think about it.'
-            },
-            {
-              question: 'Does getElementsByClassName return an array?',
-              answer: 'Sorta.  It is technically an array-like object. You can use a for loop to iterate over it, but not a forEach loop.'
-            },
-          ]
+    questions: this.props.navigation.state.params.questions
   }
 
   gotIt () {
@@ -49,8 +38,6 @@ export default class Question extends Component {
 
   render() {
     const { currentIndex, questions } = this.state
-    console.log(this.state)
-
     const question =  (questions[currentIndex])
 
     return (

@@ -28,16 +28,9 @@ const Tabs = TabNavigator({
       tabBarIcon: ({ tintColor }) => <FontAwesome name='question-circle' size={30} color={tintColor} />
     },
   },
-  Question: {
-    screen: Question,
+  }, {
     navigationOptions: {
-      tabBarLabel: 'Question',
-      tabBarIcon: ({ tintColor }) => <FontAwesome name='question-circle' size={30} color={tintColor} />
-    },
-  },
-}, {
-  navigationOptions: {
-    header: null
+      header: null
   },
   tabBarOptions: {
     activeTintColor: Platform.OS === 'ios' ? magenta : white,
@@ -77,7 +70,16 @@ const MainNavigator = StackNavigator({
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: magenta,
+        backgroundColor: orange,
+      }
+    }
+  },
+  Question: {
+    screen: Question,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: green,
       }
     }
   },

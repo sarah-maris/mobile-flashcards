@@ -30,7 +30,10 @@ class DeckTile extends Component {
           </Text>
         </View>
         <TouchableOpacity
-          onPress={() => console.log("start quizzie")}>
+          onPress={() => this.props.navigation.navigate(
+            'Question',
+            { questions: deck.questions }
+        )}>
           <View style={styles.startButton} >
             <Text style={styles.addTitle} >start quizzie</Text>
           </View>
