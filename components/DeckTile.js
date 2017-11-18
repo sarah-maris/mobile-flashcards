@@ -11,7 +11,7 @@ import { dkgray, gray, green, ltgreen, orange, white } from '../utils/colors'
 class DeckTile extends Component {
   static navigationOptions = ({navigation }) => {
     const { deck } = navigation.state.params
-    return {title: `${deck.title} Quiz`}
+    return {title: `${deck.title} Quizzie`}
   }
 
   render() {
