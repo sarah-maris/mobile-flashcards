@@ -7,12 +7,13 @@ import {
   Animated,
   Dimensions
 } from 'react-native'
-import { dkgray, white, gray, green, magenta } from '../utils/colors'
+import { dkgray, white, gray,  magenta } from '../utils/colors'
 
 export default class FlipCard extends Component {
 
   state = {
-    flipAnim: new Animated.Value(0)
+    flipAnim: new Animated.Value(0),
+    showAnswer: false
   }
 
   componentWillMount() {
@@ -44,17 +45,22 @@ export default class FlipCard extends Component {
         toValue: 0,
         friction: 8,
         tension: 10
-      }).start();
+      }).start()
     } else {
       Animated.spring(this.state.flipAnim,{
         toValue: 180,
         friction: 8,
         tension: 10
-      }).start();
+      }).start()
     }
+    this.setState({showAnswer: !this.state.showAnswer})
   }
 
   render() {
+
+    const { question } = this.props
+    const { showAnswer } = this.state
+
     const frontAnimatedStyle = {
       transform: [
         { rotateY: this.frontInterpolate},
@@ -65,7 +71,7 @@ export default class FlipCard extends Component {
       transform: [
         { rotateY: this.backInterpolate }
       ],
-      opacity:   this.backOpacity
+      opacity: this.backOpacity
     }
 
     return (
@@ -73,17 +79,19 @@ export default class FlipCard extends Component {
         <View>
           <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
             <Text style={styles.flipText}>
-              Who is buried in Grant's Tomb?
+              { question.question }
             </Text>
           </Animated.View>
           <Animated.View style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack]}>
             <Text style={styles.flipText}>
-              Grant ya idjit.
+              { question.answer }
             </Text>
           </Animated.View>
         </View>
         <TouchableOpacity onPress={() => this.flipCard()}>
-          <Text style={styles.flipTrigger}>Answer</Text>
+          <Text style={styles.flipTrigger}>
+            { showAnswer ? 'question' : 'answer'}
+          </Text>
         </TouchableOpacity>
       </View>
       )
@@ -126,7 +134,7 @@ export default class FlipCard extends Component {
       fontSize: 20,
       fontWeight: 'bold',
       textAlign: 'center',
-      width: 90
+
     },
     flipTrigger: {
       color: magenta,
