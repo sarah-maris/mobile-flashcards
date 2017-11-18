@@ -4,7 +4,7 @@ import { GET_DECKS,
          ADD_CARD } from '../actions'
 
 function decks (state = {}, action) {
-console.log(action)
+
   switch (action.type) {
 
     case GET_DECKS :

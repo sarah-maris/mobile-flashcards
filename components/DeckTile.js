@@ -8,19 +8,11 @@ import { StyleSheet,
 import { connect } from 'react-redux'
 import { dkgray, gray, green, ltgreen, orange, white } from '../utils/colors'
 import { getDeck } from '../utils/api'
-import { getDeckById }  from '../actions'
 
 class DeckTile extends Component {
   static navigationOptions = ({navigation }) => {
     const { deck } = navigation.state.params
     return {title: `${deck.title} Quizzie`}
-  }
-
-  componentDidMount () {
-
-    const { id } = this.props
-    getDeck(id)
-      .then((deck) => this.props.dispatch(getDeckById(id, deck)))
   }
 
   render() {
@@ -107,9 +99,8 @@ const styles = StyleSheet.create({
 })
 
 function mapStateToProps (state, { navigation }) {
-  const { id } = navigation.state.params
-  const deck = state[id]
-  return { deck, id }
+  const { deck } = navigation.state.params
+  return { deck }
 }
 
 export default connect(

@@ -4,7 +4,15 @@ import FlipCard from './FlipCard'
 import { dkgray, gray, green, ltgreen, red, white } from '../utils/colors'
 
 export default class Question extends Component {
+
+
   render() {
+    const question =  {
+      question: 'What is a closure?',
+      answer: 'The combination of a function and the lexical environment within which that function was declared.'
+    }
+
+
     return (
       <View style={styles.container}>
         <View style={styles.questions}>
@@ -12,7 +20,7 @@ export default class Question extends Component {
           2 of 2
         </Text>
       </View>
-      <FlipCard />
+      <FlipCard question={question}/>
       <View style={styles.row}>
         <TouchableOpacity
           onPress={() => console.log("got it")}>
