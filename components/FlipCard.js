@@ -133,8 +133,8 @@ export default class FlipCard extends Component {
       color: dkgray,
       fontSize: 20,
       fontWeight: 'bold',
+      padding: 10,
       textAlign: 'center',
-
     },
     flipTrigger: {
       color: magenta,
