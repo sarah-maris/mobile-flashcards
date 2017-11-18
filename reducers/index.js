@@ -4,7 +4,7 @@ import { GET_DECKS,
          ADD_CARD } from '../actions'
 
 function decks (state = {}, action) {
-
+console.log(action)
   switch (action.type) {
 
     case GET_DECKS :
@@ -14,7 +14,7 @@ function decks (state = {}, action) {
 
     case GET_DECK :
       return {
-        ...state[action.id]
+        [action.id]: action.deck
       }
 
     case ADD_DECK :

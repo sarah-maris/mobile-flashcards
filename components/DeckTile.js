@@ -17,9 +17,10 @@ class DeckTile extends Component {
   }
 
   componentDidMount () {
+
     const { id } = this.props
     getDeck(id)
-      .then((deck) => console.log("DECK", deck))
+      .then((deck) => this.props.dispatch(getDeckById(id, deck)))
   }
 
   render() {
@@ -106,13 +107,9 @@ const styles = StyleSheet.create({
 })
 
 function mapStateToProps (state, { navigation }) {
-
-  const { deck, id } = navigation.state.params
-
-  return {
-    deck,
-    id
-  }
+  const { id } = navigation.state.params
+  const deck = state[id]
+  return { deck, id }
 }
 
 export default connect(
