@@ -9,7 +9,8 @@ Once Yarn is installed, open up your command shell and navigate to the directory
 ```
 git clone
 https://github.com/sarah-maris/mobile-flashcards
-yarn install```
+yarn install
+```
 Or, if you prefer, download the repo, unzip it, open your command shell, navigate into the project folder and run:
 ```
 yarn install
