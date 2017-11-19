@@ -13,55 +13,73 @@ export default class Question extends Component {
 
   state = {
     currentIndex: 0,
-    questions: this.props.navigation.state.params.questions
+    questions: this.props.navigation.state.params.questions,
+    gotItCount: 0,
+    nopeCount: 0
   }
 
   gotIt () {
-    console.log("got it!")
     const nextIndex = this.state.currentIndex + 1
-    if (nextIndex < this.state.questions.length ) {
-          this.setState({ currentIndex: nextIndex })
+    const nextGotIt = this.state.gotItCount + 1
+    if (nextIndex < this.state.questions.length )  {
+      this.setState({
+        currentIndex: nextIndex,
+        gotItCount: nextGotIt
+      })
     } else {
-      console.log("Quiz over!")
+      this.setState({
+        gotItCount: nextGotIt
+      })
     }
   }
 
   nope () {
-    console.log("nope")
     const nextIndex = this.state.currentIndex + 1
+    const nextNope = this.state.nopeCount + 1
     if (nextIndex < this.state.questions.length ) {
-          this.setState({ currentIndex: nextIndex })
+      this.setState({
+        currentIndex: nextIndex,
+        nopeCount: nextNope
+      })
     } else {
       console.log("Quiz over!")
+      this.setState({
+          nopeCount: nextNope
+      })
     }
   }
 
   render() {
-    const { currentIndex, questions } = this.state
+    const { currentIndex, questions, gotItCount, nopeCount } = this.state
     const question =  (questions[currentIndex])
+    const questionNum = currentIndex + 1
+    const numQuestions = questions.length
 
     return (
       <View style={styles.container}>
         <View style={styles.questions}>
-        <Text>
-          2 of 2
-        </Text>
-      </View>
-      <FlipCard question={question}/>
-      <View style={styles.row}>
-        <TouchableOpacity
-          onPress={ this.gotIt.bind(this) }>
-          <View style={styles.greenButton} >
-            <Text style={styles.addTitle} >got it!</Text>
+          <Text>{questionNum} of {numQuestions}</Text>
+          <View style={styles.score}>
+            <Text style={styles.gotItText}>{gotItCount}</Text>
+            <Text> / </Text>
+            <Text style={styles.nopeText}>{nopeCount}</Text>
           </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-            onPress={ this.nope.bind(this) }>
-          <View style={styles.redButton} >
-            <Text style={styles.addTitle} >nope</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+        </View>
+        <FlipCard question={question}/>
+        <View style={styles.row}>
+          <TouchableOpacity
+            onPress={ this.gotIt.bind(this) }>
+            <View style={styles.greenButton} >
+              <Text style={styles.addTitle} >got it!</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+              onPress={ this.nope.bind(this) }>
+            <View style={styles.redButton} >
+              <Text style={styles.addTitle} >nope</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
     </View>
     )
   }
@@ -75,11 +93,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  questions :{
+  questions:{
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     marginTop: 20,
     width: width
+  },
+  score: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+  },
+  gotItText: {
+    color: green
+  },
+  nopeText: {
+    color: red
   },
   deckTile: {
     alignItems: 'center',
