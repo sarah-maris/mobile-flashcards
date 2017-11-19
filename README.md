@@ -12,11 +12,13 @@ https://github.com/sarah-maris/mobile-flashcards
 yarn install```
 Or, if you prefer, download the repo, unzip it, open your command shell, navigate into the project folder and run:
 ```
-yarn install```
+yarn install
+```
 
 Once the installation is finished you can start the project with:
 ```
-yarn start```
+yarn start
+```
 
 You can view the project through an emulator like [Genymotion](https://www.genymotion.com/) or directly through your android or iPhone by connecting the mobile phone to using the Expo app.
 
@@ -47,3 +49,7 @@ App was testing on an android device and an android emulator.  It _should_ work 
 * [Alternate for backfaceVisibility - does not work on android](https://github.com/facebook/react-native/issues/1973#issuecomment-262059217)
 *
 [Simple React Native forms with redux-form, immutable.js and styled-components](https://esbenp.github.io/2017/01/06/react-native-redux-form-immutable-styled-components/)
+
+
+
+*This project is licensed under the terms of the MIT license.*
