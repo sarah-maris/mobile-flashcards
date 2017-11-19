@@ -38,7 +38,12 @@ export default class FlipCard extends Component {
       outputRange: [0, 1]
     })
   }
+  componentWillReceiveProps() {
+    if (this.state.showAnswer) {
+        this.flipCard()
+    }
 
+}
   flipCard() {
     if (this.value >= 90) {
       Animated.spring(this.state.flipAnim,{

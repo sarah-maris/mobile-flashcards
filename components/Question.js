@@ -7,6 +7,7 @@ import { Dimensions,
        } from 'react-native'
 import { connect } from 'react-redux'
 import FlipCard from './FlipCard'
+import OverCard from './OverCard'
 import { dkgray, gray, green, ltgreen, red, white } from '../utils/colors'
 
 export default class Question extends Component {
@@ -15,7 +16,8 @@ export default class Question extends Component {
     currentIndex: 0,
     questions: this.props.navigation.state.params.questions,
     gotItCount: 0,
-    nopeCount: 0
+    nopeCount: 0,
+    over: false
   }
 
   gotIt () {
@@ -28,7 +30,8 @@ export default class Question extends Component {
       })
     } else {
       this.setState({
-        gotItCount: nextGotIt
+        gotItCount: nextGotIt,
+        over: true
       })
     }
   }
@@ -42,18 +45,54 @@ export default class Question extends Component {
         nopeCount: nextNope
       })
     } else {
-      console.log("Quiz over!")
       this.setState({
-          nopeCount: nextNope
+        nopeCount: nextNope,
+        over: true
       })
     }
   }
 
+  startOver () {
+    this.setState({
+      currentIndex: 0,
+      nopeCount: 0,
+      over: 0
+    })
+  }
+
+  goBack () {
+    this.props.navigation.goBack()
+  }
+
   render() {
-    const { currentIndex, questions, gotItCount, nopeCount } = this.state
+    const { currentIndex, questions, gotItCount, nopeCount, over } = this.state
     const question =  (questions[currentIndex])
     const questionNum = currentIndex + 1
     const numQuestions = questions.length
+
+    if (over) {
+      return (
+        <View style={styles.container}>
+          <OverCard
+                nopeCount={nopeCount}
+                gotItCount={gotItCount} />
+          <View style={styles.row}>
+            <TouchableOpacity
+              onPress={ this.startOver.bind(this) }>
+              <View style={styles.greenButton} >
+                <Text style={styles.addTitle} >start over</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+                onPress={ this.goBack.bind(this) }>
+              <View style={styles.redButton} >
+                <Text style={styles.addTitle} >go back</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )
+    }
 
     return (
       <View style={styles.container}>
