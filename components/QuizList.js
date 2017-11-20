@@ -58,8 +58,8 @@ class QuizList extends Component {
       Alert.alert('Invalid input', 'New quizzie title must not be blank')
     // add new deck to state and Async storage
     } else {
-      this.props.dispatch(addDeck(this.state.deckTitle))
-      addNewDeck(this.state.deckTitle)
+      this.props.dispatch(addDeck(newDeckTitle))
+      addNewDeck(newDeckTitle)
       // close form and reset state
       this.toggleForm()
       this.setState({deckTitle: ''})

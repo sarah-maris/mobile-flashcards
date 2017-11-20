@@ -22,8 +22,10 @@ export function addNewDeck (title) {
   }))
 }
 
-export function addCard (title, card) {
-  return
+export function addNewQuestion (id, questions) {
+  return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
+    [id]: {questions: questions}
+  }))
 }
 
 // helper functions for decks

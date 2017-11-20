@@ -35,7 +35,7 @@ class DeckTile extends Component {
   }
 
   submitNewQuestion = () => {
-
+    const { deck } = this.props
     const question = this.state.question
     const answer = this.state.answer
     const deckId = this.props.id
@@ -50,7 +50,8 @@ class DeckTile extends Component {
     // add new question to state and AsyncStorage
     } else {
       this.props.dispatch(addQuestion(deckId, newQuestion))
-      addNewQuestion(deckId, question)
+      deck.questions.push(newQuestion)
+      addNewQuestion(deckId, deck.questions)
       // close form and reset state
       this.toggleForm()
       this.setState({
