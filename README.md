@@ -8,7 +8,7 @@ You can find directions for installing Yarn here: [Yarn Installation](https://ya
 Once Yarn is installed, open up your command shell and navigate to the directory where you want to store the app and run
 ```
 git clone
-https://github.com/sarah-maris/mobile-flashcards
+https://github.com/sarah-maris/quizzie
 yarn install
 ```
 Or, if you prefer, download the repo, unzip it, open your command shell, navigate into the project folder and run:
