@@ -3,15 +3,20 @@ import { connect } from 'react-redux'
 import { StyleSheet,
          View,
          Text,
+         TextInput,
          FlatList,
          Dimensions,
          TouchableOpacity
        } from 'react-native'
 import { getAllDecks } from '../utils/api'
-import { getDecks }  from '../actions'
-import { dkgray, gray, ltgreen, orange, white } from '../utils/colors'
+import { getDecks, addDeck }  from '../actions'
+import { dkgray, gray, green, ltgreen, orange, white } from '../utils/colors'
 
 class QuizList extends Component {
+  state = {
+    showForm: false,
+    deckTitle: ''
+  }
 
   componentDidMount () {
     getAllDecks()
@@ -34,9 +39,25 @@ class QuizList extends Component {
       </View>
     </TouchableOpacity>
   )
+  updateTitle = (text) => {
+    this.setState({ deckTitle: text })
+  }
+
+  toggleForm = () =>{
+    this.setState({showForm: !this.state.showForm})
+  }
+  submit = () => {
+    this.props.dispatch(addDeck(this.state.deckTitle))
+    this.toggleForm();
+  }
+  toggleForm = () =>{
+    console.log(this.state.showForm,  !this.state.showForm)
+    this.setState({showForm: !this.state.showForm})
+  }
 
   render() {
     const { decks } = this.props
+    const { showForm } = this.state
 
     // convert decks to array for FlatList
     const deckList = Object.keys(decks).map(function(deckId) {
@@ -49,13 +70,27 @@ class QuizList extends Component {
 
     return (
       <View style={styles.container}>
-        {/* TODO:  Add new quizzie here */}
+
         <TouchableOpacity
-          onPress={() => console.log("new quizzie")}>
+          onPress={() => this.toggleForm()}>
           <View style={styles.addButton} >
-            <Text style={styles.addTitle} >Add New Quizzie</Text>
+            <Text style={styles.addTitle} >add new quizzie</Text>
           </View>
         </TouchableOpacity>
+        { showForm &&
+         <View>
+           <TextInput style = {styles.input}
+              underlineColorAndroid = "transparent"
+              placeholder = "new quizzie title"
+              onChangeText = {this.updateTitle}/>
+            <TouchableOpacity
+               style = {styles.submitButton}
+               onPress = {
+                this.submit
+               }>
+               <Text style = {styles.submitButtonText}> submit </Text>
+            </TouchableOpacity>
+         </View>}
         <FlatList
           data={deckList}
           renderItem={this.renderTile}
@@ -74,6 +109,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
   },
+  input: {
+     color: dkgray,
+     backgroundColor: gray,
+     borderRadius: 10,
+     height: 40,
+     margin: 10,
+     padding: 10,
+     width: 200
+  },
+  submitButton: {
+     alignSelf: 'center',
+     backgroundColor: green,
+     borderRadius: 10,
+     height: 40,
+     padding: 10,
+  },
+  submitButtonText:{
+   color: 'white',
+   fontWeight: 'bold'
+ },
   addButton: {
     alignItems: 'center',
     backgroundColor: orange,

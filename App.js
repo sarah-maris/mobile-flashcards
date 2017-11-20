@@ -43,9 +43,9 @@ const Tabs = TabNavigator({
       backgroundColor: Platform.OS === 'ios' ? white : magenta,
       shadowColor: 'rgba(0, 0, 0, 0.24)',
       shadowOffset: {
-        width: 0,
-        height: 3
-      },
+      width: 0,
+      height: 3
+    },
       shadowRadius: 6,
       shadowOpacity: 1,
     }
