@@ -30,6 +30,12 @@ If you have difficulty connecting to the app you can use the (Expo XDE)[https://
 ## Platform
 App was testing on an android device and an android emulator.  It _should_ work for iOs devices but that has not been tested.
 
+## Next Steps (future enhancements)
+* Remove list and questions
+* Edit list title and questions
+* Shuffle questions
+* Store score/which questions correct
+
 ## Development Resources
 
 ### Core resources:
@@ -40,16 +46,12 @@ App was testing on an android device and an android emulator.  It _should_ work 
 * [Expo ](https://expo.io/)
 * [Redux](https://redux.js.org/)
 * [React Redux](https://redux.js.org/docs/basics/UsageWithReact.html)
-* [Redux Form](https://redux-form.com/7.1.2/docs/gettingstarted.md/)
-
 
 ### Other helpful sources
 * [Udacity React Nanodegree](https://in.udacity.com/course/react-nanodegree--nd019)
 * [UdaciFitness demo project](https://github.com/udacity/reactnd-UdaciFitness-complete/tree/ca00e023b9c01139efdfb54d7dfa9e18c75b4297)
 * [Create a Flip Card Animation with React Native](https://codedaily.io/screencasts/12/Create-a-Flip-Card-Animation-with-React-Native)
 * [Alternate for backfaceVisibility - does not work on android](https://github.com/facebook/react-native/issues/1973#issuecomment-262059217)
-* [Simple React Native forms with redux-form, immutable.js and styled-components](https://esbenp.github.io/2017/01/06/react-native-redux-form-immutable-styled-components/)
-
 
 
 *This project is licensed under the terms of the [MIT license](./MITLicense.md).*
