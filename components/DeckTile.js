@@ -80,8 +80,8 @@ class DeckTile extends Component {
           <Text style={styles.deckTitle} >{deck.title}</Text>
           <Text style={styles.numCards}>
             {deck.questions.length} { deck.questions.length !== 1
-              ? "cards"
-              : "card"}
+              ? "quizzie questions"
+              : "quizzie question"}
           </Text>
         </View>
         { !showForm &&
@@ -98,7 +98,7 @@ class DeckTile extends Component {
           <TouchableOpacity
           onPress={() => this.toggleForm()}>
             <View style={styles.addButton} >
-              <Text style={styles.addTitle} >add new question</Text>
+              <Text style={styles.addTitle} >add new quizzie question</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -123,7 +123,7 @@ class DeckTile extends Component {
                style = {styles.submitButton}
                onPress = { this.submitNewQuestion }
                >
-               <Text style = {styles.submitButtonText}> submit </Text>
+               <Text style = {styles.submitButtonText}>add new quizzie question</Text>
             </TouchableOpacity>
          </View>}
       </View>

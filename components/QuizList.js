@@ -34,8 +34,8 @@ class QuizList extends Component {
         <Text style={styles.deckTitle} >{item.title}</Text>
         <Text style={styles.numCards}>
           {item.questions.length} { item.questions.length !== 1
-          ? "cards"
-          : "card"}
+          ? "quizzie questions"
+          : "quizzie question"}
         </Text>
       </View>
     </TouchableOpacity>
@@ -99,7 +99,7 @@ class QuizList extends Component {
                style = {styles.submitButton}
                onPress = { this.submitNewDeck }
                >
-               <Text style = {styles.submitButtonText}> submit </Text>
+               <Text style = {styles.submitButtonText}>add new quizzie</Text>
             </TouchableOpacity>
          </View>}
         <FlatList
