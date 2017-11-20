@@ -81,12 +81,14 @@ class QuizList extends Component {
 
     return (
       <View style={styles.container}>
-        <TouchableOpacity
-          onPress={() => this.toggleForm()}>
-          <View style={styles.addButton} >
-            <Text style={styles.addTitle} >add new quizzie</Text>
-          </View>
-        </TouchableOpacity>
+        { !showForm &&
+          <TouchableOpacity
+            onPress={() => this.toggleForm()}>
+            <View style={styles.addButton} >
+              <Text style={styles.addTitle} >add new quizzie</Text>
+            </View>
+          </TouchableOpacity>
+        }
         { showForm &&
          <View>
            <TextInput style = {styles.input}
