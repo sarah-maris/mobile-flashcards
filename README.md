@@ -25,7 +25,7 @@ You can view the project through an emulator like [Genymotion](https://www.genym
 
 When the app has loaded a QRcode will appear in the shell window.  Press `a` to open the app with the emulator or connected device -- or -- scan the QR code in the Expo app.
 
-If you have difficulty connecting to the app you can use the (Expo XDE)[https://expo.io/tools] to connect your device.  
+If you have difficulty connecting to the app you can use the (Expo XDE)(https://expo.io/tools) to connect your device.  
 
 ## Platform
 App was testing on an android device and an android emulator.  It _should_ work for iOs devices but that has not been tested.
@@ -43,7 +43,7 @@ App was testing on an android device and an android emulator.  It _should_ work 
 * [React](https://reactjs.org/)
 * [React Native](https://facebook.github.io/react-native/docs/getting-started.html)
 * [React Navigation](https://reactnavigation.org/docs/intro/)
-* [Expo ](https://expo.io/)
+* [Expo](https://expo.io/)
 * [Redux](https://redux.js.org/)
 * [React Redux](https://redux.js.org/docs/basics/UsageWithReact.html)
 
