@@ -11,6 +11,10 @@ import OverCard from './OverCard'
 import { dkgray, gray, green, ltgreen, red, white } from '../utils/colors'
 
 export default class Question extends Component {
+  static navigationOptions = ({navigation }) => {
+    const { title } = navigation.state.params
+    return {title: `${title} quizzie`}
+  }
 
   state = {
     currentIndex: 0,
@@ -55,6 +59,7 @@ export default class Question extends Component {
   startOver () {
     this.setState({
       currentIndex: 0,
+      gotItCount: 0,
       nopeCount: 0,
       over: 0
     })
