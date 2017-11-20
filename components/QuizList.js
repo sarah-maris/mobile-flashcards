@@ -8,7 +8,7 @@ import { StyleSheet,
          Dimensions,
          TouchableOpacity
        } from 'react-native'
-import { getAllDecks } from '../utils/api'
+import { getAllDecks, addNewDeck } from '../utils/api'
 import { getDecks, addDeck }  from '../actions'
 import { dkgray, gray, green, ltgreen, orange, white } from '../utils/colors'
 
@@ -46,12 +46,14 @@ class QuizList extends Component {
   toggleForm = () =>{
     this.setState({showForm: !this.state.showForm})
   }
-  submit = () => {
+
+  submitNewDeck = () => {
     this.props.dispatch(addDeck(this.state.deckTitle))
-    this.toggleForm();
+    addNewDeck(this.state.deckTitle)
+    this.toggleForm()
   }
+
   toggleForm = () =>{
-    console.log(this.state.showForm,  !this.state.showForm)
     this.setState({showForm: !this.state.showForm})
   }
 
@@ -70,7 +72,6 @@ class QuizList extends Component {
 
     return (
       <View style={styles.container}>
-
         <TouchableOpacity
           onPress={() => this.toggleForm()}>
           <View style={styles.addButton} >
@@ -86,7 +87,7 @@ class QuizList extends Component {
             <TouchableOpacity
                style = {styles.submitButton}
                onPress = {
-                this.submit
+                this.submitNewDeck
                }>
                <Text style = {styles.submitButtonText}> submit </Text>
             </TouchableOpacity>
@@ -135,6 +136,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     justifyContent: 'center',
     marginTop: 10,
+    marginBottom: 10,
     width: width,
   },
   addTitle: {
@@ -149,7 +151,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     height: 100,
     justifyContent: 'center',
-    marginTop: 10,
+    marginBottom: 10,
     width: width,
   },
   deckTitle: {
@@ -170,7 +172,6 @@ function mapStateToProps (decks) {
     decks
   }
 }
-
 
 export default connect(
   mapStateToProps,
