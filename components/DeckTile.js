@@ -1,23 +1,77 @@
 import React, { Component } from 'react'
-import { StyleSheet,
-         View,
-         Text,
-         Dimensions,
-         TouchableOpacity
+import {  Alert,
+          Dimensions,
+          StyleSheet,
+          Text,
+          TextInput,
+          TouchableOpacity,
+          View,
        } from 'react-native'
 import { connect } from 'react-redux'
+import { getDeck, addNewQuestion } from '../utils/api'
+import { addQuestion }  from '../actions'
 import { dkgray, gray, green, ltgreen, orange, white } from '../utils/colors'
-import { getDeck } from '../utils/api'
 
 class DeckTile extends Component {
   static navigationOptions = ({navigation }) => {
     const { deck } = navigation.state.params
-    return {title: `${deck.title} Quizzie`}
+    return {title: `${deck.title}`}
   }
 
-  render() {
+  state = {
+    showForm: false,
+    question: '',
+    answer: ''
+  }
 
+  updateQuestion = (question) => {
+    this.setState({question: question})
+  }
+  updateAnswer = (answer) => {
+    this.setState({answer: answer})
+  }
+  toggleForm = () =>{
+    this.setState({showForm: !this.state.showForm})
+  }
+
+  submitNewQuestion = () => {
+
+    const question = this.state.question
+    const answer = this.state.answer
+    const deckId = this.props.id
+    const newQuestion = {
+      question: question,
+      answer: answer
+    }
+
+    // alert user if input is empty
+    if (question === "" || answer === '') {
+      Alert.alert('Invalid input', 'Both a question and an answer are required')
+    // add new question to state and AsyncStorage
+    } else {
+      this.props.dispatch(addQuestion(deckId, newQuestion))
+      addNewQuestion(deckId, question)
+      // close form and reset state
+      this.toggleForm()
+      this.setState({
+        question: '',
+        answer: ''
+      })
+    }
+  }
+
+  startQuiz = () => this.props.navigation.navigate(
+    'Question',
+    { questions: this.props.deck.questions,
+      title: this.props.deck.title
+    }
+  )
+
+  noQuestions = () => Alert.alert('This quizzie isn\'t ready', 'Add some questions first!')
+
+  render() {
     const { deck } = this.props
+    const { showForm } = this.state
 
     return (
       <View style={styles.container} >
@@ -29,21 +83,48 @@ class DeckTile extends Component {
               : "card"}
           </Text>
         </View>
-        <TouchableOpacity
-          onPress={() => this.props.navigation.navigate(
-            'Question',
-            { questions: deck.questions }
-        )}>
-          <View style={styles.startButton} >
-            <Text style={styles.addTitle} >start quizzie</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => console.log("add new question")}>
-          <View style={styles.addButton} >
-            <Text style={styles.addTitle} >add new question</Text>
-          </View>
-        </TouchableOpacity>
+        { !showForm &&
+          <View>
+          <TouchableOpacity
+            onPress={ deck.questions.length > 0
+               ? this.startQuiz
+               : this.noQuestions
+             }>
+            <View style={styles.startButton} >
+              <Text style={styles.addTitle} >start quizzie</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+          onPress={() => this.toggleForm()}>
+            <View style={styles.addButton} >
+              <Text style={styles.addTitle} >add new question</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      }
+        { showForm &&
+         <View>
+           <TextInput style = {styles.input}
+              underlineColorAndroid = "transparent"
+              placeholder = "question"
+              onChangeText = {this.updateQuestion}
+              multiline = {true}
+              numberOfLines = {2}
+            />
+            <TextInput style = {styles.input}
+               underlineColorAndroid = "transparent"
+               placeholder = "answer"
+               onChangeText = {this.updateAnswer}
+               multiline = {true}
+               numberOfLines = {4}
+             />
+            <TouchableOpacity
+               style = {styles.submitButton}
+               onPress = { this.submitNewQuestion }
+               >
+               <Text style = {styles.submitButtonText}> submit </Text>
+            </TouchableOpacity>
+         </View>}
       </View>
     )
   }
@@ -62,7 +143,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: gray,
     borderRadius: 12,
-    height: 300,
+    height: 200,
     justifyContent: 'center',
     marginTop: 10,
     width: width,
@@ -73,6 +154,26 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingBottom: 10
   },
+  input: {
+     color: dkgray,
+     backgroundColor: gray,
+     borderRadius: 10,
+     marginTop: 10,
+     padding: 10,
+     width: width
+  },
+  submitButton: {
+     alignSelf: 'center',
+     backgroundColor: green,
+     borderRadius: 10,
+     height: 40,
+     marginTop: 10,
+     padding: 10,
+  },
+  submitButtonText:{
+   color: 'white',
+   fontWeight: 'bold'
+ },
   addButton: {
     alignItems: 'center',
     backgroundColor: orange,
@@ -102,8 +203,8 @@ const styles = StyleSheet.create({
 })
 
 function mapStateToProps (state, { navigation }) {
-  const { deck } = navigation.state.params
-  return { deck }
+  const { deck, id } = navigation.state.params
+  return { deck, id }
 }
 
 export default connect(

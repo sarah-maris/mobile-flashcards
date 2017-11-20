@@ -40,6 +40,7 @@ class QuizList extends Component {
       </View>
     </TouchableOpacity>
   )
+
   updateTitle = (text) => {
     this.setState({ deckTitle: text })
   }
@@ -63,10 +64,6 @@ class QuizList extends Component {
       this.toggleForm()
       this.setState({deckTitle: ''})
     }
-  }
-
-  toggleForm = () =>{
-    this.setState({showForm: !this.state.showForm})
   }
 
   render() {

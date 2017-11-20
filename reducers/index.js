@@ -1,7 +1,7 @@
 import { GET_DECKS,
          GET_DECK,
          ADD_DECK,
-         ADD_CARD } from '../actions'
+         ADD_QUESTION } from '../actions'
 
 function decks (state = {}, action) {
 
@@ -23,6 +23,16 @@ function decks (state = {}, action) {
           [action.title]: {
             title:action.title,
             questions: []
+          }
+      }
+
+    case ADD_QUESTION :
+    console.log(action, state[action.id])
+      return {
+        ...state,
+          [action.id]: {
+            ...state[action.id],
+            questions: [...state[action.id].questions, action.question]
           }
       }
 
