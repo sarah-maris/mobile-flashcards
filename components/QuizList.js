@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet,
-         View,
-         Text,
-         TextInput,
-         FlatList,
-         Dimensions,
-         TouchableOpacity
+import {  Alert,
+          Dimensions,
+          FlatList,
+          StyleSheet,
+          Text,
+          TextInput,
+          TouchableOpacity,
+          View,
        } from 'react-native'
 import { getAllDecks, addNewDeck } from '../utils/api'
 import { getDecks, addDeck }  from '../actions'
@@ -48,9 +49,20 @@ class QuizList extends Component {
   }
 
   submitNewDeck = () => {
-    this.props.dispatch(addDeck(this.state.deckTitle))
-    addNewDeck(this.state.deckTitle)
-    this.toggleForm()
+
+    const newDeckTitle = this.state.deckTitle
+
+    // alert user if input is empty
+    if (newDeckTitle === "") {
+      Alert.alert('Invalid input', 'New quizzie title must not be blank')
+    // add new deck to state and Async storage
+    } else {
+      this.props.dispatch(addDeck(this.state.deckTitle))
+      addNewDeck(this.state.deckTitle)
+      // close form and reset state
+      this.toggleForm()
+      this.setState({deckTitle: ''})
+    }
   }
 
   toggleForm = () =>{
@@ -61,7 +73,7 @@ class QuizList extends Component {
     const { decks } = this.props
     const { showForm } = this.state
 
-    // convert decks to array for FlatList
+    // convert decks object to array for FlatList
     const deckList = Object.keys(decks).map(function(deckId) {
       return { key: deckId,
                deck: decks[deckId],
@@ -86,9 +98,8 @@ class QuizList extends Component {
               onChangeText = {this.updateTitle}/>
             <TouchableOpacity
                style = {styles.submitButton}
-               onPress = {
-                this.submitNewDeck
-               }>
+               onPress = { this.submitNewDeck }
+               >
                <Text style = {styles.submitButtonText}> submit </Text>
             </TouchableOpacity>
          </View>}
@@ -124,6 +135,7 @@ const styles = StyleSheet.create({
      backgroundColor: green,
      borderRadius: 10,
      height: 40,
+     marginBottom: 10,
      padding: 10,
   },
   submitButtonText:{
