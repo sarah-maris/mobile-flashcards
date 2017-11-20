@@ -11,18 +11,21 @@ export function getAllDecks () {
 }
 
 export function getDeck (id) {
+  // get all decks then pull out the deck we want
   return AsyncStorage.getItem(DECK_STORAGE_KEY)
     .then((decks) => JSON.parse(decks))
     .then((decks) => decks[id])
 }
 
 export function addNewDeck (title) {
+  // add new deck with empty questions array
   return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
     [title]: {title: title, questions: []}
   }))
 }
 
 export function addNewQuestion (id, questions) {
+  // replace the questions with the revised list
   return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
     [id]: {questions: questions}
   }))

@@ -52,6 +52,10 @@ class QuizList extends Component {
   submitNewDeck = () => {
 
     const newDeckTitle = this.state.deckTitle
+    const newDeck = {
+      title: newDeckTitle,
+      questions: []
+    }
 
     // alert user if input is empty
     if (newDeckTitle === "") {
@@ -63,6 +67,11 @@ class QuizList extends Component {
       // close form and reset state
       this.toggleForm()
       this.setState({deckTitle: ''})
+      // open up new deck
+      this.props.navigation.navigate(
+        'DeckTile',
+        { deck: newDeck, id: newDeckTitle }
+      )
     }
   }
 
